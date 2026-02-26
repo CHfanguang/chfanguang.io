@@ -1,26 +1,288 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>测试页面</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
-        }
-    </style>
-</head>
-<body>
-    <h1>这是一个测试页面</h1>
-    <p>页面加载正常，音乐已自动播放</p>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadow Moon · 官网</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei";
+  background:linear-gradient(135deg,#cfcfcf,#f6f6f6 30%,#bdbdbd 60%,#f0f0f0);
+  color:#000;
+}
 
-    <!-- 网易云音乐外链 -->
-    <iframe 
-        frameborder="0" 
-        width="0" 
-        height="0" 
-        src="//music.163.com/outchain/2?type=2&id=2608143525&auto=1">
-    </iframe>
+/* 吸顶 LOGO 完全不动 */
+.top-logo{
+  position:sticky;
+  top:14px;
+  z-index:999;
+  margin:14px auto 30px;
+  width:fit-content;
+  padding:14px 28px;
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(30px) saturate(220%);
+  -webkit-backdrop-filter:blur(30px) saturate(220%);
+  border-radius:30px;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.7), 0 18px 40px rgba(0,0,0,.18);
+}
+.logo{
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:.6px;
+}
+.logo span {
+  text-shadow: none;
+}
+
+/* 内容动画 */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 20px 140px;
+  animation:iosIn .9s ease-out both;
+}
+@keyframes iosIn{
+  from{opacity:0;transform:translateY(70px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* iOS 液态玻璃 */
+.glass{
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(30px) saturate(220%);
+  -webkit-backdrop-filter:blur(30px) saturate(220%);
+  border-radius:28px;
+  padding:30px;
+  line-height:1.7;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.7), 0 30px 50px rgba(0,0,0,.18);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 科技线条装饰 */
+.tech-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  margin: 22px 0;
+  opacity: 0.6;
+}
+.tech-dot {
+  color: #00ffff;
+  font-weight: bold;
+}
+
+.title{
+  font-size:26px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.footer{
+  text-align:center;
+  margin:80px 0 160px;
+  color:#888;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* 底部导航 完全不动 */
+.bottom-nav{
+  position:fixed;
+  bottom:26px;
+  left:50%;
+  transform:translateX(-50%);
+  width:82%;
+  max-width:420px;
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(30px) saturate(220%);
+  -webkit-backdrop-filter:blur(30px) saturate(220%);
+  border-radius:30px;
+  display:flex;
+  justify-content:space-evenly;
+  padding:16px 0;
+}
+.bottom-nav a{
+  text-decoration:none;
+  font-weight:700;
+  color:#000;
+  padding: 0 8px;
+}
+
+/* 像素字体 */
+.pixel-header {
+  text-align: center;
+  margin-bottom:30px;
+  width: 100%;
+}
+.pixel-line {
+  display: block;
+  font-family: 'Press Start 2P', monospace;
+  font-weight:400;
+  line-height:1.5;
+  letter-spacing:2px;
+  text-shadow: 0 0 8px currentColor, 0 0 20px currentColor, 0 0 35px currentColor;
+}
+.pixel-shadow {
+  color: rgba(155,77,255,0.9);
+  font-size:40px;
+  margin-bottom:8px;
+}
+.pixel-ch {
+  color: rgba(61,126,255,0.9);
+  font-size:38px;
+}
+@media (max-width: 550px) {
+  .pixel-shadow { font-size:30px; }
+  .pixel-ch { font-size:28px; }
+}
+
+/* 彩色发光 */
+.title span:not([style*="color:#000"]) {
+  text-shadow: 0 0 5px currentColor,0 0 15px currentColor;
+  transition: text-shadow 0.2s ease;
+}
+.title span[style*="color:#000"] {
+  text-shadow: none;
+}
+
+.qq-tip {
+  color: #888;
+  font-style: italic;
+  font-size:14px;
+}
+
+/* 音乐按钮样式 */
+.music-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.3);
+  border: 1px solid rgba(0,255,255,0.4);
+  border-radius: 20px;
+  color: #000;
+  font-size:14px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s;
+}
+.music-btn:hover {
+  background: rgba(0,255,255,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<!-- 吸顶栏 完全原样 -->
+<div class="top-logo">
+  <span class="logo">
+    <span style="color:#4285F4;">S</span>
+    <span style="color:#EA4335;">h</span>
+    <span style="color:#FBBC05;">a</span>
+    <span style="color:#4285F4;">d</span>
+    <span style="color:#34A853;">o</span>
+    <span style="color:#EA4335;">w</span>
+    <span style="color:#000;"> </span>
+    <span style="color:#34A853;">M</span>
+    <span style="color:#4285F4;">o</span>
+    <span style="color:#EA4335;">o</span>
+    <span style="color:#FBBC05;">n</span>
+  </span>
+</div>
+
+<div class="container">
+  <div class="glass">
+
+    <div class="pixel-header">
+      <span class="pixel-line pixel-shadow">Shadow Moon</span>
+      <span class="pixel-line pixel-ch">CH凡光</span>
+    </div>
+
+    <div class="title">
+      <span style="color:#4285F4;">欢</span>
+      <span style="color:#EA4335;">迎</span>
+      <span style="color:#FBBC05;">进</span>
+      <span style="color:#4285F4;">入</span>
+      <span style="color:#34A853;"> </span>
+      <span style="color:#EA4335;">Shadow Moon</span>
+      <span style="color:#000;"> 官方网站</span>
+    </div>
+
+    <div class="tech-line"></div>
+
+    <p><span class="tech-dot">•</span> 服务项目：<br>
+    我的世界外挂 / VPN翻墙 / 华为装谷歌 / 帮助制作官网 / 网页美化 / 短信代轰炸无限时长 / 技术指导 / 开全家户籍 / 户籍出道 / 手机号轰炸无限循环 / tg飞机账号购买 / 翻墙避免被抓教程 / 翻墙必备软件 / 公安天眼查户籍 / 猎魔查户籍 / 查名下房产 / 查家庭住址 /所有商品均为1元</p>
+
+    <p><span class="tech-dot">•</span> 咨询通道：<br>
+    <a href="https://qm.qq.com/q/JYP3V4yogK" target="_blank">QQ好友</a>
+    <div class="qq-tip">未能跳转请手动添加QQ好友：3683029258</div></p>
+
+    <p><span class="tech-dot">•</span> 备用通道：
+    <a href="https://qm.qq.com/q/Gq3tfhiXG8" target="_blank">备用QQ好友</a>
+    <div class="qq-tip">未能跳转请手动添加QQ好友：3581370395</div></p>
+
+    <div class="tech-line"></div>
+
+    <p><span class="tech-dot">•</span> 客服时间：08:00–22:00（回复≤30分钟）</p>
+    <p><span class="tech-dot">•</span> 所有商品：1 元</p>
+    <p><span class="tech-dot">•</span> 支付方式：微信支付</p>
+    <p><span class="tech-dot">•</span> 售后服务：终身免费</p>
+
+    <div class="tech-line"></div>
+
+    <p><span class="tech-dot">•</span> 官方QQ群：523725674</p>
+    <p><span class="tech-dot">•</span> 快手账号：
+    <a href="https://v.kuaishou.com/JE2u8ANT" target="_blank">快手账号</a>（我的世界CH凡光）</p>
+
+    <div class="tech-line"></div>
+
+    <p><b>免责声明</b><br>
+    本站内容仅供学习与技术交流。<br>
+    使用相关软件产生的后果由使用者自行承担。<br>
+    请遵守法律法规，合法使用。<br>
+    本网站/软件售卖出的商品改不退还，请慎重考虑。<br>
+    本网站所有商品均为1元/不讲价/不赊账</p>
+
+    <div class="footer" style="text-align:center;">
+      <!-- 音乐按钮 放在 Powerd 上面 -->
+      <div class="music-btn" id="musicBtn">🎵 点击播放音乐</div>
+      Powerd by Shadow Moon<br>
+      © CH凡光
+    </div>
+
+  </div>
+</div>
+
+<!-- 底部导航 完全不动 -->
+<div class="bottom-nav">
+  <a href="index.html">主页</a>
+  <a href="notice.html">通知</a>
+  <a href="other.html">其他</a>
+</div>
+
+<!-- 音乐iframe -->
+<iframe id="musicFrame" style="display:none;" width="0" height="0" 
+src="https://music.163.com/outchain/2?type=2&id=2608143525&auto=0"></iframe>
+
+<script>
+let playing = false;
+const btn = document.getElementById('musicBtn');
+const frame = document.getElementById('musicFrame');
+
+btn.addEventListener('click', () => {
+  if(!playing) {
+    frame.src = "https://music.163.com/outchain/2?type=2&id=2608143525&auto=1";
+    btn.innerText = "⏸️ 点击暂停音乐";
+    playing = true;
+  } else {
+    frame.src = "";
+    btn.innerText = "🎵 点击播放音乐";
+    playing = false;
+  }
+});
+</script>
+
 </body>
 </html>
